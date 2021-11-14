@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     #Custom Apps
     'cbc',
+    'users',
 
     #Default Django Apps
     'django.contrib.admin',
@@ -128,3 +129,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# My settings
+LOGIN_URL = 'users:login'
