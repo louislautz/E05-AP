@@ -16,10 +16,11 @@
             <p>{{ review.text|linebreaks }}</p>
             <p>
                 <a href="{% url 'crazy_book_club:edit_review' review.id %}">Edit review</a>
-              </p>
+            </p>
         </li>
     {% empty %}
         <li>There are no reviews for this book yet.</li>
     {% endfor %}
     </ul>
-    {% endblock content %}
+
+{% endblock content %}

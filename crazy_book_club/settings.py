@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     #Custom Apps
     'cbc',
+    'users',
 
     #Default Django Apps
     'django.contrib.admin',
