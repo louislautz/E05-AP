@@ -3,12 +3,20 @@
 {% block content %}
 
     <p>Book: {{ book }}</p>
+
     <p>Reviews:</p>
+    <p>
+        <a href="{% url 'crazy_book_club:new_review' book.id %}">Add new review</a>
+    </p>
+    
     <ul>
     {% for review in reviews %} 
         <li>
             <p>{{ review.date_added|date:'d M, Y H:i' }}</p>
             <p>{{ review.text|linebreaks }}</p>
+            <p>
+                <a href="{% url 'crazy_book_club:edit_review' review.id %}">Edit review</a>
+              </p>
         </li>
     {% empty %}
         <li>There are no reviews for this book yet.</li>

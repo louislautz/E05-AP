@@ -13,6 +13,10 @@ urlpatterns = [
     path('reviews/', views.reviews, name='reviews'),
     # Detail page for a single book. 
     path('books/<int:book_id>/', views.book, name='book'),
-    # Page for adding a new topic
-    # path('new_book/', views.new_book, name='new_book'),
+    # Page for adding a new book
+    path('new_book/', views.new_book, name='new_book'),
+    # Page for adding a new review
+    path('new_review/<int:book_id>/', views.new_review, name='new_review'),
+    # Page for editing reviews
+    path('edit_review/<int:review_id>/', views.edit_review, name='edit_review'),
 ]
