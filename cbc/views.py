@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from .models import Book, Review
 from .forms import BookForm, ReviewForm
@@ -7,12 +8,14 @@ def index(request):
     """The home page for the crazy book club."""
     return render(request, 'crazy_book_club/index.html')
 
+@login_required
 def books(request): 
     """Show all books."""
     books = Book.objects.order_by('date_added')
     context = {'books': books}
     return render(request, 'crazy_book_club/books.html', context)
 
+@login_required
 def book(request, book_id):
     """Shows a single book and all its reviews"""
     book = Book.objects.get(id=book_id)
@@ -20,6 +23,7 @@ def book(request, book_id):
     context = {'book': book, 'reviews': reviews}
     return render(request, 'crazy_book_club/book.html', context)
 
+@login_required
 def new_book(request):
     """Add a new book."""
     if request.method != 'POST':
@@ -35,12 +39,14 @@ def new_book(request):
     context = {'form': form}
     return render(request, 'crazy_book_club/new_book.html', context)
 
+@login_required
 def reviews(request): 
     """Show all reviews."""
     reviews = Review.objects.order_by('date_added')
     context = {'reviews': reviews}
     return render(request, 'crazy_book_club/reviews.html', context)
 
+@login_required
 def new_review(request, book_id):
     """Adds a new review to a particular book"""
     book = Book.objects.get(id=book_id)
@@ -61,6 +67,7 @@ def new_review(request, book_id):
     context = {'book': book, 'form': form}
     return render(request, 'crazy_book_club/new_review.html', context)
 
+@login_required
 def edit_review(request, review_id):
     """Changes an existing review"""
     review = Review.objects.get(id=review_id)

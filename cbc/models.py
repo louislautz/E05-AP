@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models.fields.json import JSONField
+from django.contrib.auth.models import User
+
 
 class Book(models.Model):
     """Describes a book class"""
@@ -9,6 +11,7 @@ class Book(models.Model):
 
     date_added = models.DateTimeField(auto_now_add=True) #automatically sets field when first created
     date_modified = models.DateTimeField(auto_now=True) #automatically sets field each time its saved
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         """Returns a message that describes the book"""
