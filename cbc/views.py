@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
 from .models import Book, Review
 from .forms import BookForm, ReviewForm
@@ -11,7 +12,7 @@ def index(request):
 @login_required
 def books(request): 
     """Show all books."""
-    books = Book.objects.order_by('date_added')
+    books = Book.objects.filter(owner=request.user).order_by('date_added')
     context = {'books': books}
     return render(request, 'crazy_book_club/books.html', context)
 
@@ -19,6 +20,11 @@ def books(request):
 def book(request, book_id):
     """Shows a single book and all its reviews"""
     book = Book.objects.get(id=book_id)
+    
+    # Make sure the book belongs to the current user.
+    if book.owner != request.user:
+        raise Http404
+
     reviews = book.review_set.order_by('-date_added')
     context = {'book': book, 'reviews': reviews}
     return render(request, 'crazy_book_club/book.html', context)
@@ -33,8 +39,11 @@ def new_book(request):
         # POST data submitted; process data.
         form = BookForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            new_book = form.save(commit=False)
+            new_book.owner = request.user
+            new_book.save()
             return redirect('crazy_book_club:books')
+
     # Display a blank or invalid form.
     context = {'form': form}
     return render(request, 'crazy_book_club/new_book.html', context)
@@ -72,6 +81,8 @@ def edit_review(request, review_id):
     """Changes an existing review"""
     review = Review.objects.get(id=review_id)
     book = review.book
+    if book.owner != request.user:
+        raise Http404
 
     if request.method != 'POST':
         #Initial request; pre-fill form with the current directory
