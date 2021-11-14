@@ -12,7 +12,7 @@ urlpatterns = [
     # Review page
     path('reviews/', views.reviews, name='reviews'),
     # Detail page for a single book. 
-    # path('books/<int:book_id>/', views.book, name='book'),
-    # # Page for adding a new topic
+    path('books/<int:book_id>/', views.book, name='book'),
+    # Page for adding a new topic
     # path('new_book/', views.new_book, name='new_book'),
 ]
