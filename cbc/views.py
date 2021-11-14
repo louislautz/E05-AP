@@ -12,6 +12,13 @@ def books(request):
     context = {'books': books}
     return render(request, 'crazy_book_club/books.html', context)
 
+def book(request, book_id):
+    """Shows a single book and all its reviews"""
+    book = Book.objects.get(id=book_id)
+    reviews = book.review_set.order_by('-date_added')
+    context = {'book': book, 'reviews': reviews}
+    return render(request, 'crazy_book_club/book.html', context)
+
 def reviews(request): 
     """Show all reviews."""
     reviews = Review.objects.order_by('date_added')

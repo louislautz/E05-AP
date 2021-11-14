@@ -1,0 +1,17 @@
+{% extends 'crazy_book_club/base.html' %}
+
+{% block content %}
+
+    <p>Book: {{ book }}</p>
+    <p>Reviews:</p>
+    <ul>
+    {% for review in reviews %} 
+        <li>
+            <p>{{ review.date_added|date:'d M, Y H:i' }}</p>
+            <p>{{ review.text|linebreaks }}</p>
+        </li>
+    {% empty %}
+        <li>There are no reviews for this book yet.</li>
+    {% endfor %}
+    </ul>
+    {% endblock content %}

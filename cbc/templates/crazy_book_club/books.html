@@ -2,14 +2,14 @@
 
 {% block content %}
   <p>Books</p>
-  
+
   <ul>
     {% for book in books %}
-      <li>
-        {{ book }}
-      </li>
+        <li>
+            <a href="{% url 'crazy_book_club:book' book.id %}">{{ book }}</a>
+        </li>
     {% empty %}
-      <li>No books have been added yet :(</li>
+        <li>No books have been added yet :(</li>
     {% endfor %}
   </ul>
 
