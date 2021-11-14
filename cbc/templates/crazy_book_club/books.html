@@ -1,0 +1,16 @@
+{% extends "crazy_book_club/base.html" %}
+
+{% block content %}
+  <p>Books</p>
+  
+  <ul>
+    {% for book in books %}
+      <li>
+        {{ book }}
+      </li>
+    {% empty %}
+      <li>No books have been added yet :(</li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}
