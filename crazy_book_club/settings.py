@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'cbc',
     'users',
 
+    #Third-Party Apps
+    'bootstrap4',
+
     #Default Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
