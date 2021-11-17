@@ -1,4 +1,10 @@
 {% extends "crazy_book_club/base.html" %}
-{% block content %}
-    <p>Share the craziest books you ever read and tell your friends how you liked them! CRAZY!!!.</p>
-{% endblock content %}
+{% block page_header %}
+    <div class="jumbotron">
+        <h1 class="display-3">Share your favorite books.</h1>
+
+        <p class="lead">Share the craziest books you ever read and tell your friends how you liked them! CRAZY!!!</p>
+
+        <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}" role="button">Register &raquo;</a>
+    </div>
+{% endblock page_header %}

@@ -1,26 +1,28 @@
 {% extends 'crazy_book_club/base.html' %}
 
+{% block page_header %}
+    <h3>{{ book }}</h3>
+{% endblock page_header %}
+
 {% block content %}
 
-    <p>Book: {{ book }}</p>
-
-    <p>Reviews:</p>
     <p>
         <a href="{% url 'crazy_book_club:new_review' book.id %}">Add new review</a>
     </p>
     
-    <ul>
     {% for review in reviews %} 
-        <li>
-            <p>{{ review.date_added|date:'d M, Y H:i' }}</p>
-            <p>{{ review.text|linebreaks }}</p>
-            <p>
-                <a href="{% url 'crazy_book_club:edit_review' review.id %}">Edit review</a>
-            </p>
-        </li>
+        <div class="card mb-3">
+            <h4 class="card-header">
+                {{ review.date_added|date:'d M, Y H:i' }}
+                <small><a href="{% url 'crazy_book_club:edit_review' review.id %}">edit review</a></small>
+            </h4>
+            <div class="card-body">
+                {{ review.text|linebreaks }}
+            </div>
+        </div>
+
     {% empty %}
-        <li>There are no reviews for this book yet.</li>
+        <p>There are no reviews for this book yet.</p>
     {% endfor %}
-    </ul>
 
 {% endblock content %}
